@@ -4,17 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokédex</title>
+    <title>Pokédex-Classic</title>
+    <link rel="shorcut icon" type="image/x-icon" href="./img/pokeball.png">
     <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style./bgColors.css">
-    <link rel="stylesheet" href="./style./pokeballspinner.css">
+    <link rel="stylesheet" href="./style/card.css">
     <script src="./script/main.js"></script>
     <script src="./script/templates.js"></script>
     <script src="./script/bgColors.js"></script>
+
 </head>
 
-<body>
+<body onload="init()">
+    <div class="Maincontainer">
+        <header>
+            <img class="headlogo reverse" src="./img/pokemon.jpg">
+            <!-- <img class="reverse" src="./img/131.png">
+            <img class="reverse" src="./img/45.png">
+            <img class="reverse" src="./img/25.png"> -->
+            <h1>PokéDex-Classic</h1>
+            <!-- <img src="./img/60.png">
+            <img src="./img/121.png">
+            <img src="./img/144.png"> -->
+            <img class="headlogo" src="./img/pokemon.jpg">
+        </header>
 
+        <div class="showcard" id="pokecards"></div>
+
+    </div>
 </body>
 
 </html>
