@@ -16,11 +16,13 @@ header {
 
 }
 
-
-
 h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 60px;
+}
+
+h2 {
+    margin: 0;
 }
 
 .reverse {
