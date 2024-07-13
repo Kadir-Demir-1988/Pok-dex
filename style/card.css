@@ -6,18 +6,23 @@
     text-align: center;
     gap: 10px;
     margin: 0;
-    
+
 }
 
 .pokeimg {
     max-width: 270px;
     height: auto;
-    
 }
 
-#borderid{
+.pokeimg:hover {
+    transition: transform 0.5s ease;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#borderid {
     border: solid 1px black;
     width: 310px;
     border-radius: 16px;
+    
 }
-

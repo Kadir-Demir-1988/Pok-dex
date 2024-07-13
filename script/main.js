@@ -1,5 +1,9 @@
-let allPokemons = [];
 let currentPokemon = 1;
+let allPokemons = [];
+
+
+
+
 
 function init() {
   loadAPI();
@@ -39,11 +43,10 @@ function showPokemonCards() {
       <div id="borderid">
         <div class="pokemonNumber"><h3>#${i + 1}</h3></div>
         <h2>${upperCase(allPokemons[i].name)}</h2>
-        <div><img class="pokeimg" src="${allPokemons[i].details.sprites.other["official-artwork"].front_default}"></div>
+        <div><img class="pokeimg" src="${
+          allPokemons[i].details.sprites.other["official-artwork"].front_default}"></div>
       </div>
       
     `;
   }
 }
-
-
