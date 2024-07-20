@@ -11,7 +11,7 @@ function init() {
 
 async function loadAPI() {
   try {
-    let url = `https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`;
+    let url = `https://pokeapi.co/api/v2/pokemon?limit=150&offset=0`;
     let response = await fetch(url);
     let responseAsJson = await response.json();
     await loadPokemonDetails(responseAsJson.results);
@@ -49,21 +49,44 @@ function showPokemonCards() {
   let content = document.getElementById("pokecards");
   content.innerHTML = "";
   for (let i = 0; i < pokemonDetails.name.length; i++) {
-    let types = pokemonDetails.type[i].split(', ');
+    let types = pokemonDetails.type[i].split(", ");
     for (let j = 0; j < types.length; j++) {
       types[j] = upperCase(types[j]);
     }
+    let primaryTypeClass = cardbgColors(types[0].toLowerCase());
     content.innerHTML += `
-        <div id="borderid">
+        <div id="borderid-${i}" class="borderid ${primaryTypeClass}">
           <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
-          <div>
-            <img class="pokeimg" src="${pokemonDetails.img[i]}" alt="${pokemonDetails.name[i]}">
+          <div id="bgcolor-${i}" class="bgcolor">
+            <img class="pokeimg" src="${pokemonDetails.img[i]}" alt="${
+      pokemonDetails.name[i]
+    }">
           </div>
           <div class="typeContainer">
-            ${types.map(type => `<div class="${TypeColorClass(type.toLowerCase())}">${type}</div>`).join('')}
+            ${types
+              .map(
+                (type) =>
+                  `<div class="${TypeColorClass(
+                    type.toLowerCase()
+                  )}">${type}</div>`
+              )
+              .join("")}
           </div>
         </div>
       `;
+  }
+
+  setCardBackgrounds();
+}
+
+function setCardBackgrounds() {
+  for (let i = 0; i < pokemonDetails.name.length; i++) {
+    let types = pokemonDetails.type[i];
+    let primaryTypeClass = cardbgColors(types[0].toLowerCase());
+    let element = document.getElementById(`bgcolor-${i}`);
+    if (element) {
+      element.classList.add(primaryTypeClass);
+    }
   }
 }
 

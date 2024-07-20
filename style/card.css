@@ -6,8 +6,11 @@
     text-align: center;
     gap: 10px;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 
 }
+
+
 
 .pokeimg {
     max-width: 270px;
@@ -25,6 +28,7 @@
     width: 310px;
     border-radius: 16px;
 
+
 }
 
 .typeContainer {
@@ -40,63 +44,112 @@
 }
 
 .box-shadow-grass {
-    box-shadow: inset 5px 5px 50px #5fbd58 !important;
+    box-shadow: inset 5px 5px 50px #5fbd58;
+    border-radius: 16px;
 }
 
 .box-shadow-fire {
-    box-shadow: inset 5px 5px 50px #fba54c !important;
+    box-shadow: inset 5px 5px 50px #fba54c;
+    border-radius: 16px;
 }
 
 .box-shadow-water {
-    box-shadow: inset 5px 5px 50px #539ddf !important;
+    box-shadow: inset 5px 5px 50px #539ddf;
+    border-radius: 16px;
 }
 
 .box-shadow-bug {
-    box-shadow: inset 5px 5px 50px #92bc2c !important;
+    box-shadow: inset 5px 5px 50px #92bc2c;
+    border-radius: 16px;
 }
 
 .box-shadow-normal {
-    box-shadow: inset 5px 5px 50px #a0a29f !important;
+    box-shadow: inset 5px 5px 50px #a0a29f;
+    border-radius: 16px;
 }
 
 .box-shadow-poison {
-    box-shadow: inset 5px 5px 50px #b763cf !important;
+    box-shadow: inset 5px 5px 50px #b763cf;
+    border-radius: 16px;
 }
 
 .box-shadow-electric {
-    box-shadow: inset 5px 5px 50px #f2d94e !important;
+    box-shadow: inset 5px 5px 50px #f2d94e;
+    border-radius: 16px;
 }
 
 .box-shadow-ground {
-    box-shadow: inset 5px 5px 50px #da7c4d !important;
+    box-shadow: inset 5px 5px 50px #da7c4d;
+    border-radius: 16px;
 }
 
 .box-shadow-fairy {
-    box-shadow: inset 5px 5px 50px #ee90e6 !important;
+    box-shadow: inset 5px 5px 50px #ee90e6;
+    border-radius: 16px;
 }
 
 .box-shadow-fighting {
-    box-shadow: inset 5px 5px 50px #d3425f !important;
+    box-shadow: inset 5px 5px 50px #d3425f;
+    border-radius: 16px;
 }
+
+.box-shadow-poison {
+    box-shadow: inset 5px 5px 50px #b763cf;
+    border-radius: 16px;
+}
+
+.box-shadow-psychic {
+    box-shadow: inset 5px 5px 50px #fa8581;
+    border-radius: 16px;
+}
+
+.box-shadow-rock {
+    box-shadow: inset 5px 5px 50px #c9bb8a;
+    border-radius: 16px;
+}
+
+.box-shadow-ghost {
+    box-shadow: inset 5px 5px 50px #CCCCFF;
+    border-radius: 16px;
+}
+
+.box-shadow-ice {
+    box-shadow: inset 5px 5px 50px #66FFFF;
+    border-radius: 16px;
+}
+
+.box-shadow-dragon {
+    box-shadow: inset 5px 5px 50px orangered;
+    border-radius: 16px;
+}
+
+
 
 .bgColorgrass {
     background-color: #5fbd58;
     font-size: 24px;
-    width: 72px;
+    width: 80px;
     border-radius: 16px;
 }
 
 .bgColorpsychic {
-    background-color: #5f6dbc;
+    background-color: #fa8581;
     font-size: 24px;
-    width: 88px;
+    width: 96px;
     border-radius: 16px;
 }
 
 .bgColorfighting {
     background-color: #d3425f;
     font-size: 24px;
-    width: 96px;
+    width: 104px;
+    border-radius: 16px;
+}
+
+.bgColorghost {
+    background-color: #CCCCFF;
+    font-size: 24px;
+    width: 88px;
     border-radius: 16px;
 }
 
@@ -105,49 +158,49 @@
 .bgColorfire {
     background-color: #fba54c;
     font-size: 24px;
-    width: 72px;
+    width: 64px;
     border-radius: 16px;
 }
 
 .bgColorwater {
     background-color: #539ddf;
     font-size: 24px;
-    width: 72px;
+    width: 80px;
     border-radius: 16px;
 }
 
 .bgColorbug {
     background-color: #92bc2c;
     font-size: 24px;
-    width: 72px;
+    width: 64px;
     border-radius: 16px;
 }
 
 .bgColornormal {
     background-color: #a0a29f;
     font-size: 24px;
-    width: 88px;
+    width: 96px;
     border-radius: 16px;
 }
 
 .bgColorpoison {
     background-color: #b763cf;
     font-size: 24px;
-    width: 88px;
+    width: 96px;
     border-radius: 16px;
 }
 
 .bgColorlectric {
     background-color: #f2d94e;
     font-size: 24px;
-    width: 88px;
+    width: 96px;
     border-radius: 16px;
 }
 
 .bgColorground {
     background-color: #da7c4d;
     font-size: 24px;
-    width: 88px;
+    width: 96px;
     border-radius: 16px;
 }
 
@@ -167,8 +220,8 @@
 
 
 
-.bgColorice{
-    background-color: lightskyblue;
+.bgColorice {
+    background-color: #66FFFF;
     font-size: 24px;
     width: 56px;
     border-radius: 16px;
@@ -181,15 +234,17 @@
     border-radius: 16px;
 }
 
-.bgColorsteel{
-    background-color: #5695a3;
+
+
+.bgColordragon {
+    background-color: orangered;
     font-size: 24px;
-    width: 72px;
+    width: 88px;
     border-radius: 16px;
 }
 
-.bgColordragon{
-    background-color: orangered;
+.bgColorsteel {
+    background-color: #5695a3;
     font-size: 24px;
     width: 88px;
     border-radius: 16px;

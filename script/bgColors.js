@@ -28,11 +28,11 @@ function TypeColorClass(type) {
       return "bgColorice";
     case "flying":
       return "bgColorflying";
-    case "steel":
-      return "bgColorsteel";
     case "ghost":
-      return "bgColorpsychic";
+      return "bgColorghost";
     case "dragon":
       return "bgColordragon";
+    case "steel":
+      return "bgColorsteel";
   }
 }
