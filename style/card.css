@@ -1,25 +1,34 @@
 .showcard {
+
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    text-align: center;
+
+}
+
+h2 {
+    font-size: 24px;
+}
+
+.detailcards{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    text-align: center;
-    gap: 10px;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-
+    flex-direction: column;
 }
 
 
 
 .pokeimg {
-    max-width: 270px;
+    max-width: 180px;
     height: auto;
 }
 
 .pokeimg:hover {
     transition: transform 0.5s ease;
-    transform: scale(1.1);
+    transform: scale(1.07);
     cursor: pointer;
 }
 
@@ -39,8 +48,14 @@
     margin: 2px;
     gap: 16px;
     color: white;
+}
 
+.typclasses{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    
 }
 
 .box-shadow-grass {
@@ -127,125 +142,137 @@
 
 .bgColorgrass {
     background-color: #5fbd58;
-    font-size: 24px;
-    width: 80px;
+    font-size: 16px;
+    width: 56px;
+    height: 24px;
     border-radius: 16px;
+    
 }
 
 .bgColorpsychic {
     background-color: #fa8581;
-    font-size: 24px;
-    width: 96px;
+    font-size: 16px;
+    width: 72px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorfighting {
     background-color: #d3425f;
-    font-size: 24px;
-    width: 104px;
+    font-size: 16px;
+    width: 80px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorghost {
     background-color: #CCCCFF;
-    font-size: 24px;
+    font-size: 16px;
     width: 88px;
+    height: 24px;
     border-radius: 16px;
 }
 
-
-
 .bgColorfire {
     background-color: #fba54c;
-    font-size: 24px;
-    width: 64px;
+    font-size: 16px;
+    width: 48px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorwater {
     background-color: #539ddf;
-    font-size: 24px;
-    width: 80px;
+    font-size: 16px;
+    width: 64px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorbug {
     background-color: #92bc2c;
-    font-size: 24px;
-    width: 64px;
+    font-size: 16px;
+    width: 48px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColornormal {
     background-color: #a0a29f;
-    font-size: 24px;
-    width: 96px;
+    font-size: 16px;
+    width: 72px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorpoison {
     background-color: #b763cf;
-    font-size: 24px;
-    width: 96px;
+    font-size: 16px;
+    width: 64px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorlectric {
     background-color: #f2d94e;
-    font-size: 24px;
-    width: 96px;
+    font-size: 16px;
+    width: 72px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorground {
     background-color: #da7c4d;
-    font-size: 24px;
-    width: 96px;
+    font-size: 16px;
+    width: 72px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorfairy {
     background-color: #ee90e6;
-    font-size: 24px;
-    width: 72px;
+    font-size: 16px;
+    width: 56px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorrock {
     background-color: #c9bb8a;
-    font-size: 24px;
+    font-size: 16px;
     width: 72px;
+    height: 24px;
     border-radius: 16px;
 }
 
-
-
 .bgColorice {
     background-color: #66FFFF;
-    font-size: 24px;
+    font-size: 16px;
     width: 56px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorflying {
     background-color: #a1bbec;
-    font-size: 24px;
-    width: 88px;
+    font-size: 16px;
+    width: 64px;
+    height: 24px;
     border-radius: 16px;
 }
 
-
-
 .bgColordragon {
     background-color: orangered;
-    font-size: 24px;
+    font-size: 16px;
     width: 88px;
+    height: 24px;
     border-radius: 16px;
 }
 
 .bgColorsteel {
     background-color: #5695a3;
-    font-size: 24px;
+    font-size: 16px;
     width: 88px;
+    height: 24px;
     border-radius: 16px;
 }

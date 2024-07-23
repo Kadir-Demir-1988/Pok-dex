@@ -5,6 +5,12 @@
 
 }
 
+.searchfunction {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 header {
     display: flex;
     justify-content: space-evenly;
@@ -24,7 +30,7 @@ h1 {
 h2 {
     margin: 0;
     font-weight: 300;
-    
+
 }
 
 .reverse {
