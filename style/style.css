@@ -36,3 +36,51 @@ h2 {
 .reverse {
     transform: scaleX(-1);
 }
+
+.detailbtn {
+    background-color: white;
+    width: 80px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.detailbtn:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+    text-decoration: color white;
+}
+
+.closex {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+    cursor: pointer;
+
+
+
+
+}
+
+.smalldetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 120px;
+}
+
+.smallx {
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.show{
+    display: show;
+}

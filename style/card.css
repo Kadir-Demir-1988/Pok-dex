@@ -8,6 +8,16 @@
 
 }
 
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 320px;
+    height: 480px;
+    
+}
+
 h2 {
     font-size: 24px;
 }
@@ -17,9 +27,12 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
 }
 
-
+.detailimg{
+    max-width: 180px;
+}
 
 .pokeimg {
     max-width: 180px;

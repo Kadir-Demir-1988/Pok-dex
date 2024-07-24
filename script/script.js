@@ -73,7 +73,7 @@ function upperCase(name) {
 
 function showPokemonCards() {
   let content = document.getElementById("pokecards");
-  content.innerHTML = ""; // Container leeren, bevor neue Inhalte hinzugefügt werden
+  content.innerHTML = "";
   for (let i = 0; i < pokemonDetails.name.length; i++) {
     let types = pokemonDetails.type[i].split(", ");
     for (let j = 0; j < types.length; j++) {
@@ -109,21 +109,73 @@ function showPokemonCards() {
 
 function showDetails(i) {
   let detailcontainer = document.getElementById("detailcard");
-  let limitedMoves = pokemonDetails.moves[i].slice(0, 4); // Nur die ersten 4 Moves
-  detailcontainer.innerHTML = `
-    <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
-    <img src="${pokemonDetails.img[i]}" alt="${
+  detailcontainer.classList.remove("hidden");
+  let types = pokemonDetails.type[i].split(", ");
+  let primaryTypeClass = cardbgColors(types[0].toLowerCase());
+  detailcontainer.innerHTML = `<div id="detail-borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${
+    pokemonDetails.id[i]
+  }">
+      <div class="closex">
+      <img src="./assets/chevron_left.svg" alt="">
+      <button onclick="closeSmallCard()" class="smallx">X</button>
+      <img src="./assets/chevron_right.svg" alt=""></div>
+      <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
+      <img class="detailimg" src="${pokemonDetails.img[i]}" alt="${
     pokemonDetails.name[i]
-  }" class="detail-img">
-    <p>ID: ${pokemonDetails.id[i]}</p>
+  }">
+      <div class="typeContainer">
+        ${types
+          .map(
+            (type) =>
+              `<div class="typclasses ${TypeColorClass(
+                type.toLowerCase()
+              )}">${upperCase(type)}</div>`
+          )
+          .join("")}
+      </div>
+      <div class="detailbuttons">
+        <button onclick="renderAbout(${i})" class="detailbtn">About</button>
+        <button onclick="renderMoves(${i})" class="detailbtn">Moves</button>
+        <button onclick="renderStats(${i})" class="detailbtn">Stats</button>
+      </div>
+      <div class="smalldetails" id="smalldetails"></div>
+  </div>`;
+  renderAbout(i);
+}
+
+function renderAbout(i) {
+  let detailContent = document.getElementById("smalldetails");
+  detailContent.innerHTML = "";
+  detailContent.innerHTML = `
     <p>Höhe: ${pokemonDetails.height[i]}</p>
     <p>Gewicht: ${pokemonDetails.weight[i]}</p>
     <p>Fähigkeiten: ${pokemonDetails.ability[i].join(", ")}</p>
-    <p>Moves: ${limitedMoves.join(", ")}</p>
-    <p>Stats: ${pokemonDetails.stats[i]
-      .map((stat) => `${stat.name}: ${stat.value}`)
-      .join(", ")}</p>
   `;
+}
+
+function renderMoves(i) {
+  let detailContent = document.getElementById("smalldetails");
+  let limitedMoves = pokemonDetails.moves[i].slice(0, 4);
+  detailContent.innerHTML = "";
+  detailContent.innerHTML = `
+    <div>Moves: ${limitedMoves.join(", ")}</div>
+  `;
+}
+
+function renderStats(i) {
+  let detailcontainer = document.getElementById("smalldetails");
+  detailcontainer.innerHTML = "";
+  detailcontainer.innerHTML = `
+  <div>Stats: ${pokemonDetails.stats[i]
+    .map((stat) => `${stat.name}: ${stat.value}`)
+    .join(", ")}</div>
+  `;
+}
+
+function closeSmallCard() {
+  let detailCard = document.getElementById("detailcard");
+
+  detailCard.classList.add("hidden");
 }
 
 function setCardBackgrounds() {
