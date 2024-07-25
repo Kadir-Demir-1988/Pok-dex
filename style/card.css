@@ -1,9 +1,9 @@
 .showcard {
 
-    padding-inline-start: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
     text-align: center;
 
 }
@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 320px;
+    width: 300px;
     height: 480px;
     
 }

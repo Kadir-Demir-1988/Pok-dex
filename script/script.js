@@ -18,6 +18,8 @@ let pokemonDetails = {
   stats: [],
 };
 
+let currentIndex = 0;
+
 function init() {
   loadAPI();
 }
@@ -108,17 +110,27 @@ function showPokemonCards() {
 }
 
 function showDetails(i) {
+  currentIndex = i; // Setze den aktuellen Index
+  let overlay = document.getElementById("overlay");
   let detailcontainer = document.getElementById("detailcard");
+
+  overlay.classList.remove("hidden");
+  overlay.classList.add("show");
+
   detailcontainer.classList.remove("hidden");
+  detailcontainer.classList.add("show");
+
   let types = pokemonDetails.type[i].split(", ");
   let primaryTypeClass = cardbgColors(types[0].toLowerCase());
-  detailcontainer.innerHTML = `<div id="detail-borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${
+  detailcontainer.innerHTML = `
+    <div id="detail-borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${
     pokemonDetails.id[i]
   }">
       <div class="closex">
-      <img src="./assets/chevron_left.svg" alt="">
-      <button onclick="closeSmallCard()" class="smallx">X</button>
-      <img src="./assets/chevron_right.svg" alt=""></div>
+        <img onclick="previous()" src="./assets/chevron_left.svg" alt="">
+        <button onclick="closeSmallCard()" class="smallx">X</button>
+        <img onclick="next()" src="./assets/chevron_right.svg" alt="">
+      </div>
       <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
       <img class="detailimg" src="${pokemonDetails.img[i]}" alt="${
     pokemonDetails.name[i]
@@ -139,17 +151,65 @@ function showDetails(i) {
         <button onclick="renderStats(${i})" class="detailbtn">Stats</button>
       </div>
       <div class="smalldetails" id="smalldetails"></div>
-  </div>`;
+    </div>
+  `;
   renderAbout(i);
+}
+
+function renderStatsChart(i) {
+  const stats = pokemonDetails.stats[i];
+
+  const labels = stats.map((stat) => upperCase(stat.name));
+  const data = stats.map((stat) => stat.value);
+
+  const ctx = document.getElementById("statsChart").getContext("2d");
+  const chart = new Chart(ctx, {
+    type: "radar", // Typ des Diagramms
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: `${upperCase(pokemonDetails.name[i])} Stats`,
+          data: data,
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        r: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function next() {
+  currentIndex = (currentIndex + 1) % pokemonDetails.name.length; // Nächster Index, zyklisch
+  showDetails(currentIndex);
+}
+
+function previous() {
+  currentIndex =
+    (currentIndex - 1 + pokemonDetails.name.length) %
+    pokemonDetails.name.length; // Vorheriger Index, zyklisch
+  showDetails(currentIndex);
 }
 
 function renderAbout(i) {
   let detailContent = document.getElementById("smalldetails");
   detailContent.innerHTML = "";
   detailContent.innerHTML = `
-    <p>Höhe: ${pokemonDetails.height[i]}</p>
-    <p>Gewicht: ${pokemonDetails.weight[i]}</p>
-    <p>Fähigkeiten: ${pokemonDetails.ability[i].join(", ")}</p>
+    <div><img src="./assets/height.svg"> ${
+      pokemonDetails.height[i] / 10
+    } m</div>
+    <div><img src="./assets/weight.svg"> ${
+      pokemonDetails.weight[i] / 10
+    } kg</div>
+    <div>Fähigkeiten: ${pokemonDetails.ability[i].join(", ")}</div>
   `;
 }
 
@@ -164,17 +224,62 @@ function renderMoves(i) {
 
 function renderStats(i) {
   let detailcontainer = document.getElementById("smalldetails");
-  detailcontainer.innerHTML = "";
   detailcontainer.innerHTML = `
-  <div>Stats: ${pokemonDetails.stats[i]
-    .map((stat) => `${stat.name}: ${stat.value}`)
-    .join(", ")}</div>
+    <canvas id="statsChart" width="400" height="400"></canvas>
   `;
+
+  const stats = pokemonDetails.stats[i];
+
+  const labels = stats.map((stat) => upperCase(stat.name));
+  const data = stats.map((stat) => stat.value);
+
+  const ctx = document.getElementById("statsChart").getContext("2d");
+  const chart = new Chart(ctx, {
+    type: "bar", // Typ des Diagramms auf 'bar' gesetzt
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: `${upperCase(pokemonDetails.name[i])} Stats`,
+          data: data,
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y", // Ändert das Diagramm in ein horizontales Balkendiagramm
+      scales: {
+        x: {
+          display: false, // Verbirgt die X-Achse
+          beginAtZero: true,
+        },
+        y: {
+          display: true, // Verbirgt die Y-Achse
+          beginAtZero: true,
+        },
+      },
+      plugins: {
+        legend: {
+          display: false, // Verbirgt die Legende
+        },
+        title: {
+          display: false, // Verbirgt den Diagrammtitel
+        },
+      },
+    },
+  });
 }
 
 function closeSmallCard() {
+  let overlay = document.getElementById("overlay");
   let detailCard = document.getElementById("detailcard");
 
+  overlay.classList.remove("show");
+  overlay.classList.add("hidden");
+
+  detailCard.classList.remove("show");
   detailCard.classList.add("hidden");
 }
 

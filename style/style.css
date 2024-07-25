@@ -1,7 +1,7 @@
 .Maincontainer {
     max-width: 1920px;
     margin: 0 auto;
-    border: solid 1px black;
+
 
 }
 
@@ -68,6 +68,7 @@ h2 {
     align-items: center;
     flex-direction: column;
     height: 120px;
+    width: 150px;
 }
 
 .smallx {
@@ -81,6 +82,54 @@ h2 {
     display: none;
 }
 
-.show{
-    display: show;
+#detailcard {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    opacity: 0;
+    /* Initiale Opazität */
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    /* Über dem Overlay */
+}
+
+#detailcard.show {
+    opacity: 1;
+    /* Wenn die Klasse 'show' hinzugefügt wird, ändert sich die Opazität auf 1 */
+}
+
+#detailcard {
+    z-index: 2;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Halbtransparenter schwarzer Hintergrund */
+    z-index: 1;
+    display: none;
+    /* Anfangs ausgeblendet */
+}
+
+
+#overlay.show {
+    display: block;
+}
+
+.chart-canvas {
+    width: 600px;
+    height: 400px;
 }
