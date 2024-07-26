@@ -12,8 +12,9 @@
     <script src="./script/templates.js"></script>
     <script src="./script/bgColors.js"></script>
     <script src="./script/cardbgColors.js"></script>
+    <script src="./script/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
 </head>
 
 <body onload="init()">
@@ -24,40 +25,25 @@
             <img class="headlogo" src="./img/pokemon.jpg">
         </header>
 
-        <div class="searchfunction">
-            <div class="search-wrapper">
-                <div class="search-wrap">
-                    <img src="./assets/search.svg" alt="search icon" class="search-icon">
-                    <input type="text" class="search-input body3-fonts" placeholder="Search" id="search-input">
-                    <img src="./assets/cross.svg" alt="cross icon" class="search-close-icon" id="search-close-icon">
-                </div>
-            </div>
-            <div class="sort-wrapper">
-                <div class="sort-wrap">
-                    <img src="./assets/sorting.svg" alt="sorting" class="sort-icon" id="sort-icon">
-                </div>
-            </div>
-
-            <div class="filter-wrapper">
-                <p class="body2-fonts">Sort by:</p>
-                <div class="filter-wrap">
-                    <div>
-                        <input type="radio" id="number" name="filters" value="number" checked />
-                        <label for="number" class="body3-fonts">Number</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="name" name="filters" value="name" />
-                        <label for="name" class="body3-fonts">Name</label>
-                    </div>
-                </div>
-            </div>
+        <div class="searching">
+            <input type="text" id="search-input" placeholder="Search Pokémon...">
+            <button onclick="searchPokemon()">Search</button>
+            <div class="hidden" id="search-results"></div>
         </div>
+
         <div class="showcard" id="pokecards"></div>
         <div id="overlay" class="hidden"></div>
         <div class="hidden" id="detailcard"></div>
+        <div class="loadmorebtn">
+            <button onclick="loadmore()" class="loadmore">Load More Pokémons</button>
+        </div>
+        <div id="loading" class="hidden">
+            <img src="./img/pokeball.png" alt="Loading">
+            <p>Loading more Pokémons...</p>
+        </div>
 
 
-        
+
 
     </main>
 </body>
