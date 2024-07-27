@@ -8,6 +8,7 @@
     <link rel="shorcut icon" type="image/x-icon" href="./img/pokeball.png">
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/card.css">
+    <link rel="stylesheet" href="./style/mobile.css">
     <script src="./script/script.js"></script>
     <script src="./script/templates.js"></script>
     <script src="./script/bgColors.js"></script>
@@ -21,13 +22,19 @@
     <main class="Maincontainer">
         <header>
             <img class="headlogo reverse" src="./img/pokemon.jpg">
-            <h1>PokéDex-Classic</h1>
+            <img class="minipokemon" src="./img/121.png">
+            <img class="minipokemon" src="./img/131.png">
+            <img class="minipokemon" src="./img/144.png">
+            <h1>PokéDex</h1>
+            <img class="minipokemon" src="./img/25.png">
+            <img class="minipokemon" src="./img/45.png">
+            <img class="minipokemon" src="./img/60.png">
             <img class="headlogo" src="./img/pokemon.jpg">
         </header>
 
         <div class="searching">
-            <input type="text" id="search-input" placeholder="Search Pokémon...">
-            <button onclick="searchPokemon()">Search</button>
+            <input class="inputstyle" type="text" id="search-input" placeholder="Search Pokémon...">
+            <button class="btnstyle" onclick="searchPokemon()">Search</button>
             <div class="hidden" id="search-results"></div>
         </div>
 

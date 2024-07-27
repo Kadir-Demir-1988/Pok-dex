@@ -1,0 +1,22 @@
+@media (max-width: 1000px) {
+    .minipokemon{
+        display: none;
+    }
+
+    #loading img {
+        width: 250px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .headlogo{
+        display: none;
+    }
+    #loading img {
+        width: 150px;
+        display: block;
+        margin: 0 auto;
+    }
+}

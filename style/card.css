@@ -1,36 +1,32 @@
 .showcard {
-
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
     text-align: center;
-
 }
 
-.card{
+.card {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 300px;
     height: 480px;
-    
 }
 
 h2 {
     font-size: 24px;
 }
 
-.detailcards{
+.detailcards {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
 }
 
-.detailimg{
+.detailimg {
     max-width: 180px;
 }
 
@@ -49,8 +45,6 @@ h2 {
     border: solid 1px black;
     width: 310px;
     border-radius: 16px;
-
-
 }
 
 .typeContainer {
@@ -63,12 +57,10 @@ h2 {
     color: white;
 }
 
-.typclasses{
+.typclasses {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    
 }
 
 .box-shadow-grass {
@@ -151,15 +143,12 @@ h2 {
     border-radius: 16px;
 }
 
-
-
 .bgColorgrass {
     background-color: #5fbd58;
     font-size: 16px;
     width: 56px;
     height: 24px;
     border-radius: 16px;
-    
 }
 
 .bgColorpsychic {

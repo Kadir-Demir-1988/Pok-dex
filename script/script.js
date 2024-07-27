@@ -1,13 +1,6 @@
 let MAX_POKEMON = 25;
-const searchInput = document.querySelector("#search-input");
-const numberFilter = document.querySelector("#number");
-const nameFilter = document.querySelector("#name");
-const notFoundMessage = document.querySelector("#not-found-message");
-
 let url = `https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`;
-
 let offset = 0;
-
 let pokemonDetails = {
   name: [],
   id: [],
@@ -19,7 +12,6 @@ let pokemonDetails = {
   weight: [],
   stats: [],
 };
-
 let currentIndex = 0;
 
 function init() {
@@ -48,29 +40,7 @@ async function loadPokemonDetails(pokemonList) {
     try {
       let response = await fetch(pokemonList[i].url);
       let details = await response.json();
-      let types = details.types
-        .map((typeInfo) => typeInfo.type.name)
-        .join(", ");
-      pokemonDetails.name.push(details.name);
-      pokemonDetails.id.push(details.id);
-      pokemonDetails.img.push(
-        details.sprites.other["official-artwork"].front_default
-      );
-      pokemonDetails.type.push(types);
-      pokemonDetails.ability.push(
-        details.abilities.map((abilityInfo) => abilityInfo.ability.name)
-      );
-      pokemonDetails.moves.push(
-        details.moves.map((moveInfo) => moveInfo.move.name)
-      );
-      pokemonDetails.height.push(details.height);
-      pokemonDetails.weight.push(details.weight);
-      pokemonDetails.stats.push(
-        details.stats.map((statInfo) => ({
-          name: statInfo.stat.name,
-          value: statInfo.base_stat,
-        }))
-      );
+      processPokemonDetails(details);
     } catch (error) {
       console.error("Hat nicht geklappt", error);
     }
@@ -107,77 +77,22 @@ function showPokemonCards() {
       types[j] = upperCase(types[j]);
     }
     let primaryTypeClass = cardbgColors(types[0].toLowerCase());
-    content.innerHTML += `
-      <div id="borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${
-      pokemonDetails.id[i]
-    }">
-        <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
-        <div id="bgcolor-${i}" class="bgcolor">
-          <img onclick="showDetails(${i})" class="pokeimg" src="${
-      pokemonDetails.img[i]
-    }" alt="${pokemonDetails.name[i]}">
-        </div>
-        <div class="typeContainer">
-          ${types
-            .map(
-              (type) =>
-                `<div class="typclasses ${TypeColorClass(
-                  type.toLowerCase()
-                )}">${upperCase(type)}</div>`
-            )
-            .join("")}
-        </div>
-      </div>
-    `;
+    content.innerHTML += showPokemonCardsHTML(i, types, primaryTypeClass);
   }
-
   setCardBackgrounds();
 }
 
 function showDetails(i) {
-  currentIndex = i; // Setze den aktuellen Index
+  currentIndex = i;
   let overlay = document.getElementById("overlay");
   let detailcontainer = document.getElementById("detailcard");
-
   overlay.classList.remove("hidden");
   overlay.classList.add("show");
-
   detailcontainer.classList.remove("hidden");
   detailcontainer.classList.add("show");
-
   let types = pokemonDetails.type[i].split(", ");
   let primaryTypeClass = cardbgColors(types[0].toLowerCase());
-  detailcontainer.innerHTML = `
-    <div id="detail-borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${
-    pokemonDetails.id[i]
-  }">
-      <div class="closex">
-        <img onclick="previous()" src="./assets/chevron_left.svg" alt="">
-        <button onclick="closeSmallCard()" class="smallx">X</button>
-        <img onclick="next()" src="./assets/chevron_right.svg" alt="">
-      </div>
-      <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
-      <img class="detailimg" src="${pokemonDetails.img[i]}" alt="${
-    pokemonDetails.name[i]
-  }">
-      <div class="typeContainer">
-        ${types
-          .map(
-            (type) =>
-              `<div class="typclasses ${TypeColorClass(
-                type.toLowerCase()
-              )}">${upperCase(type)}</div>`
-          )
-          .join("")}
-      </div>
-      <div class="detailbuttons">
-        <button onclick="renderAbout(${i})" class="detailbtn">About</button>
-        <button onclick="renderMoves(${i})" class="detailbtn">Moves</button>
-        <button onclick="renderStats(${i})" class="detailbtn">Stats</button>
-      </div>
-      <div class="smalldetails" id="smalldetails"></div>
-    </div>
-  `;
+  detailcontainer.innerHTML = showDetailsHTML(i, types, primaryTypeClass);
   renderAbout(i);
 }
 
@@ -196,22 +111,7 @@ function previous() {
 function renderAbout(i) {
   let detailContent = document.getElementById("smalldetails");
   detailContent.innerHTML = "";
-  detailContent.innerHTML = `
-  <div class="detailwh">
-    <div class="height"><img src="./assets/height.svg"> ${
-      pokemonDetails.height[i] / 10
-    } m</div>
-    <div class="weight"><img src="./assets/weight.svg"> ${
-      pokemonDetails.weight[i] / 10
-    } kg</div>
-  </div>  
-    <div class="ability">Abilities:</div>
-    <ul class="ability-list">
-      ${pokemonDetails.ability[i]
-        .map((ability) => `<li>${ability}</li>`)
-        .join("")}
-    </ul>
-  `;
+  detailContent.innerHTML = renderAboutHTML(i);
 }
 
 function renderMoves(i) {
@@ -219,8 +119,7 @@ function renderMoves(i) {
   let limitedMoves = pokemonDetails.moves[i].slice(0, 4);
   detailContent.innerHTML = "";
   detailContent.innerHTML = `
-    
-    <ul class="moves-list">
+        <ul class="moves-list">
       ${limitedMoves.map((move) => `<li>${move}</li>`).join("")}
     </ul>
   `;
@@ -229,10 +128,8 @@ function renderMoves(i) {
 function closeSmallCard() {
   let overlay = document.getElementById("overlay");
   let detailCard = document.getElementById("detailcard");
-
   overlay.classList.remove("show");
   overlay.classList.add("hidden");
-
   detailCard.classList.remove("show");
   detailCard.classList.add("hidden");
 }
@@ -257,41 +154,40 @@ function hideLoading() {
 }
 
 function searchPokemon() {
-  const searchTerm = document.getElementById('search-input').value.toLowerCase();
-  const resultsContainer = document.getElementById('search-results');
-  
-  // Nur suchen, wenn mindestens 3 Buchstaben eingegeben wurden
+  const searchTerm = document
+    .getElementById("search-input")
+    .value.toLowerCase();
+  const resultsContainer = document.getElementById("search-results");
   if (searchTerm.length < 3) {
-    resultsContainer.innerHTML = '';
-    resultsContainer.classList.add('hidden'); // Verstecke die Ergebnisse, wenn weniger als 3 Buchstaben eingegeben wurden
+    resultsContainer.innerHTML = "";
+    resultsContainer.classList.add("hidden");
     return;
   }
 
-  // Filtere die Pokémon-Liste nach dem Suchbegriff
-  const filteredPokemons = pokemonDetails.name.filter(name => name.toLowerCase().startsWith(searchTerm));
-  
-  // Ergebnisse anzeigen
+  const filteredPokemons = pokemonDetails.name.filter((name) =>
+    name.toLowerCase().startsWith(searchTerm)
+  );
   displaySearchResults(filteredPokemons);
 }
 
 function displaySearchResults(results) {
-  const resultsContainer = document.getElementById('search-results');
-  resultsContainer.innerHTML = ''; // Vorherige Ergebnisse löschen
-  
+  const resultsContainer = document.getElementById("search-results");
+  resultsContainer.innerHTML = "";
   if (results.length === 0) {
-    resultsContainer.innerHTML = '<p>No results found</p>';
-    resultsContainer.classList.remove('hidden'); // Zeige die Ergebnisse auch bei "No results found"
+    resultsContainer.innerHTML = "<p>No results found</p>";
+    resultsContainer.classList.remove("hidden");
     return;
   }
 
-  // Erstelle eine Liste der Ergebnisse
   results.forEach((result, index) => {
     const pokemonIndex = pokemonDetails.name.indexOf(result);
-    const listItem = document.createElement('div');
-    listItem.classList.add('search-result-item');
-    listItem.innerHTML = `
-      <p>${upperCase(result)} #${pokemonDetails.id[pokemonIndex]}</p>
-      <img src="${pokemonDetails.img[pokemonIndex]}" alt="${result}" class="result-img">
+    const listItem = document.createElement("div");
+    listItem.classList.add("search-result-item");
+    listItem.innerHTML = `<p>${upperCase(result)} #${
+      pokemonDetails.id[pokemonIndex]
+    }</p><img src="${
+      pokemonDetails.img[pokemonIndex]
+    }" alt="${result}" class="result-img">
     `;
     listItem.onclick = () => {
       showDetails(pokemonIndex);
@@ -299,14 +195,11 @@ function displaySearchResults(results) {
     };
     resultsContainer.appendChild(listItem);
   });
-
-  resultsContainer.classList.remove('hidden'); // Zeige die Ergebnisse, wenn Suchergebnisse vorhanden sind
+  resultsContainer.classList.remove("hidden");
 }
 
 function hideSearchResults() {
-  const resultsContainer = document.getElementById('search-results');
-  resultsContainer.innerHTML = ''; // Löscht die Suchergebnisse
-  resultsContainer.classList.add('hidden'); // Verstecke die Suchergebnisse
+  const resultsContainer = document.getElementById("search-results");
+  resultsContainer.innerHTML = "";
+  resultsContainer.classList.add("hidden");
 }
-
-console.log(pokemonDetails);
