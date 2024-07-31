@@ -24,17 +24,28 @@ function showPokemonCardsHTML(i, types, primaryTypeClass) {
 }
 
 function showDetailsHTML(i, types, primaryTypeClass) {
-    return `
-      <div id="detail-borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${pokemonDetails.id[i]}">
+  return `
+      <div id="detail-borderid-${i}" class="card borderid ${primaryTypeClass}" data-id="${
+    pokemonDetails.id[i]
+  }">
         <div class="closex">
           <img onclick="previous()" src="./assets/chevron_left.svg" alt="">
           <button onclick="closeSmallCard()" class="smallx">X</button>
           <img onclick="next()" src="./assets/chevron_right.svg" alt="">
         </div>
         <h2>${upperCase(pokemonDetails.name[i])} #${pokemonDetails.id[i]}</h2>
-        <img class="detailimg" src="${pokemonDetails.img[i]}" alt="${pokemonDetails.name[i]}">
+        <img class="detailimg" src="${pokemonDetails.img[i]}" alt="${
+    pokemonDetails.name[i]
+  }">
         <div class="typeContainer">
-          ${types.map(type => `<div class="typclasses ${TypeColorClass(type.toLowerCase())}">${upperCase(type)}</div>`).join("")}
+          ${types
+            .map(
+              (type) =>
+                `<div class="typclasses ${TypeColorClass(
+                  type.toLowerCase()
+                )}">${upperCase(type)}</div>`
+            )
+            .join("")}
         </div>
         <div class="detailbuttons">
           <button onclick="renderAbout(${i})" class="detailbtn">About</button>
@@ -44,7 +55,7 @@ function showDetailsHTML(i, types, primaryTypeClass) {
         <div class="smalldetails" id="smalldetails"></div>
       </div>
     `;
-  }
+}
 
 function processPokemonDetails(details) {
   let types = details.types.map((typeInfo) => typeInfo.type.name).join(", ");
@@ -54,6 +65,10 @@ function processPokemonDetails(details) {
     details.sprites.other["official-artwork"].front_default
   );
   pokemonDetails.type.push(types);
+  outsourcePokemonDet(details);
+}
+
+function outsourcePokemonDet(details) {
   pokemonDetails.ability.push(
     details.abilities.map((abilityInfo) => abilityInfo.ability.name)
   );
@@ -87,4 +102,47 @@ function renderAboutHTML(i) {
           .join("")}
       </ul>
       `;
+}
+
+function outsourceSearchResults(results, resultsContainer) {
+  results.forEach((result, index) => {
+    const pokemonIndex = pokemonDetails.name.indexOf(result);
+    const types = pokemonDetails.type[pokemonIndex].split(", ");
+    for (let j = 0; j < types.length; j++) {
+      types[j] = upperCase(types[j]);
+    }
+    const primaryTypeClass = cardbgColors(types[0].toLowerCase());
+
+    const listItem = document.createElement("div");
+    listItem.classList.add("search-result-item");
+    listItem.innerHTML = `
+      <div id="borderid-${pokemonIndex}" class="card borderid ${primaryTypeClass}" data-id="${
+      pokemonDetails.id[pokemonIndex]
+    }">
+        <h2>${upperCase(pokemonDetails.name[pokemonIndex])} #${
+      pokemonDetails.id[pokemonIndex]
+    }</h2>
+        <div id="bgcolor-${pokemonIndex}" class="bgcolor">
+          <img onclick="showDetails(${pokemonIndex})" class="pokeimg" src="${
+      pokemonDetails.img[pokemonIndex]
+    }" alt="${pokemonDetails.name[pokemonIndex]}">
+        </div>
+        <div class="typeContainer">
+          ${types
+            .map(
+              (type) =>
+                `<div class="typclasses ${TypeColorClass(
+                  type.toLowerCase()
+                )}">${upperCase(type)}</div>`
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+    listItem.onclick = () => {
+      showDetails(pokemonIndex);
+      hideSearchResults();
+    };
+    resultsContainer.appendChild(listItem);
+  });
 }

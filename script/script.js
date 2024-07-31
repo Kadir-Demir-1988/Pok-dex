@@ -48,6 +48,8 @@ async function loadPokemonDetails(pokemonList) {
 }
 
 async function loadmore() {
+  const loadMoreBtn = document.getElementById("loadmore-btn");
+  loadMoreBtn.disabled = true;
   offset += MAX_POKEMON;
   showLoading();
   try {
@@ -61,6 +63,7 @@ async function loadmore() {
     console.error("Hat nicht geklappt", error);
   } finally {
     hideLoading();
+    loadMoreBtn.disabled = false;
   }
 }
 
@@ -158,7 +161,7 @@ function searchPokemon() {
     .getElementById("search-input")
     .value.toLowerCase();
   const resultsContainer = document.getElementById("search-results");
-  if (searchTerm.length < 3) {
+  if (searchTerm.length < 2) {
     resultsContainer.innerHTML = "";
     resultsContainer.classList.add("hidden");
     return;
@@ -170,31 +173,26 @@ function searchPokemon() {
   displaySearchResults(filteredPokemons);
 }
 
+function isEmpty() {
+  let searchinput = document.getElementById("search-input").value;
+  if (searchinput.length == 0) {
+    showPokemonCards();
+  }
+}
+
 function displaySearchResults(results) {
   const resultsContainer = document.getElementById("search-results");
   resultsContainer.innerHTML = "";
+  resultsContainer.style.display = 'flex';
+
   if (results.length === 0) {
     resultsContainer.innerHTML = "<p>No results found</p>";
     resultsContainer.classList.remove("hidden");
     return;
   }
 
-  results.forEach((result, index) => {
-    const pokemonIndex = pokemonDetails.name.indexOf(result);
-    const listItem = document.createElement("div");
-    listItem.classList.add("search-result-item");
-    listItem.innerHTML = `<p>${upperCase(result)} #${
-      pokemonDetails.id[pokemonIndex]
-    }</p><img src="${
-      pokemonDetails.img[pokemonIndex]
-    }" alt="${result}" class="result-img">
-    `;
-    listItem.onclick = () => {
-      showDetails(pokemonIndex);
-      hideSearchResults();
-    };
-    resultsContainer.appendChild(listItem);
-  });
+  outsourceSearchResults(results, resultsContainer);
+
   resultsContainer.classList.remove("hidden");
 }
 
@@ -202,4 +200,5 @@ function hideSearchResults() {
   const resultsContainer = document.getElementById("search-results");
   resultsContainer.innerHTML = "";
   resultsContainer.classList.add("hidden");
+  resultsContainer.style.display = "";
 }

@@ -1,4 +1,4 @@
-@media (max-width: 1000px) {
+@media (max-width: 1080px) {
     .minipokemon{
         display: none;
     }
@@ -18,5 +18,14 @@
         width: 150px;
         display: block;
         margin: 0 auto;
+    }
+
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 280px;
+        height: 480px;
     }
 }

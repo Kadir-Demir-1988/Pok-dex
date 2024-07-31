@@ -33,7 +33,7 @@
         </header>
 
         <div class="searching">
-            <input class="inputstyle" type="text" id="search-input" placeholder="Search Pokémon...">
+            <input class="inputstyle" type="text" id="search-input" placeholder="Search Pokémon..." onkeyup="isEmpty()">
             <button class="btnstyle" onclick="searchPokemon()">Search</button>
             <div class="hidden" id="search-results"></div>
         </div>
@@ -42,16 +42,12 @@
         <div id="overlay" class="hidden"></div>
         <div class="hidden" id="detailcard"></div>
         <div class="loadmorebtn">
-            <button onclick="loadmore()" class="loadmore">Load More Pokémons</button>
+            <button id="loadmore-btn" onclick="loadmore()" class="loadmore">Load More Pokémons</button>
         </div>
         <div id="loading" class="hidden">
             <img src="./img/pokeball.png" alt="Loading">
             <p>Loading more Pokémons...</p>
         </div>
-
-
-
-
     </main>
 </body>
 
